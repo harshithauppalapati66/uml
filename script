@@ -1,0 +1,74 @@
+// Store traders and items with prices
+let traders = {};
+const itemPrices = {
+    "Laptop": 500,
+    "Phone": 300,
+    "Tablet": 200,
+    "Headphones": 100
+};
+
+// Function to create a trader
+function createTrader() {
+    let traderId = document.getElementById("traderId").value;
+    let balance = document.getElementById("balance").value;
+
+    if (!traderId || balance === "") {
+        document.getElementById("traderMessage").textContent = "Error: Invalid trader data.";
+        return;
+    }
+
+    balance = parseFloat(balance);
+    if (isNaN(balance) || balance < 0) {
+        document.getElementById("traderMessage").textContent = "Error: Invalid balance. Please enter a valid number.";
+        return;
+    }
+
+    traders[traderId] = balance;
+    document.getElementById("traderMessage").textContent = `Trader ${traderId} created with balance $${balance}.`;
+}
+
+// Function to place an order
+function placeOrder() {
+    let traderId = document.getElementById("orderTraderId").value;
+    let item = document.getElementById("item").value;
+    let quantity = document.getElementById("quantity").value;
+
+    if (!traders[traderId]) {
+        document.getElementById("orderMessage").textContent = "Error: Trader not found.";
+        return;
+    }
+    
+    if (!item) {
+        document.getElementById("orderMessage").textContent = "Error: Please select an item.";
+        return;
+    }
+
+    quantity = parseInt(quantity);
+    if (isNaN(quantity) || quantity <= 0) {
+        document.getElementById("orderMessage").textContent = "Error: Invalid amount. Cannot place an order with 0 or negative quantity.";
+        return;
+    }
+
+    let totalCost = itemPrices[item] * quantity;
+    if (traders[traderId] < totalCost) {
+        document.getElementById("orderMessage").textContent = `Error: Not enough balance to place the order. Required: $${totalCost}, Available: $${traders[traderId]}.`;
+        return;
+    }
+
+    traders[traderId] -= totalCost;
+    document.getElementById("orderMessage").textContent = `Order placed for ${quantity} ${item}(s). Total: $${totalCost}. Remaining balance: $${traders[traderId]}.`;
+}
+
+// Function to check balance
+function checkBalance() {
+    let traderId = document.getElementById("checkTraderId").value;
+
+    if (!traders[traderId]) {
+        document.getElementById("balanceMessage").textContent = "Error: Trader not found.";
+        return;
+    }
+
+    document.getElementById("balanceMessage").textContent = `Trader ${traderId} balance: $${traders[traderId]}.`;
+}
+
+
