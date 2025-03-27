@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Trading Platform</h1>
+
+    <!-- Trader Creation Section -->
+    <section>
+        <h2>Create Trader</h2>
+        <label for="traderId">Trader ID:</label>
+        <input type="text" id="traderId">
+        
+        <label for="balance">Balance ($):</label>
+        <input type="number" id="balance">
+        
+        <button onclick="createTrader()">Create Trader</button>
+        <p id="traderMessage"></p>
+    </section>
+
+    <!-- Order Placement Section -->
+    <section>
+        <h2>Place Order</h2>
+        <label for="orderTraderId">Trader ID:</label>
+        <input type="text" id="orderTraderId">
+
+        <label for="item">Select Item:</label>
+        <select id="item">
+            <option value="">--Select--</option>
+            <option value="Laptop">Laptop ($500)</option>
+            <option value="Phone">Phone ($300)</option>
+            <option value="Tablet">Tablet ($200)</option>
+            <option value="Headphones">Headphones ($100)</option>
+        </select>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity">
+
+        <button onclick="placeOrder()">Place Order</button>
+        <p id="orderMessage"></p>
+    </section>
+
+    <!-- Balance Check Section -->
+    <section>
+        <h2>Check Balance</h2>
+        <label for="checkTraderId">Trader ID:</label>
+        <input type="text" id="checkTraderId">
+        
+        <button onclick="checkBalance()">Check Balance</button>
+        <p id="balanceMessage"></p>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
